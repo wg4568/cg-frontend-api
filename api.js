@@ -52,6 +52,11 @@ API.Users.getById = function(id, callback) {
 	API.Request.Get("/api/users/" + id, callback);
 }
 
+// Gets single user matching search query
+API.Users.search = function(query, callback) {
+	API.Request.Get("/api/users/findOne?filter=" + JSON.stringify(query), callback);
+}
+
 // Creates a user from 'info' object
 API.Users.create = function(info, callback) {
 	API.Request.Post("/api/createuser", {
