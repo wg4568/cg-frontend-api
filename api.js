@@ -2,7 +2,7 @@
 var API = {};
 
 // URL that the API posts to
-API.URL = "http://localhost:3000";
+// API.URL = "http://localhost:3000";
 API.URL = "https://cg-loopback.mybluemix.net";
 
 // Container for request methods
@@ -52,6 +52,14 @@ API.Users.create = function(info, callback) {
 		location: info.location,
 		tags: info.tags
 	}, callback);
+}
+
+// Container for methods relating to projects
+API.Projects = {};
+
+// Gets all projects in database as array
+API.Projects.getAll = function(callback) {
+	API.Request.Get("/api/projects", callback);
 }
 
 // Gets single project with given ID
