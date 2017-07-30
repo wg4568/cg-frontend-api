@@ -59,10 +59,26 @@ API.Projects = {};
 
 // Gets all projects in database as array
 API.Projects.getAll = function(callback) {
-	API.Request.Get("/api/projects", callback);
+	API.Request.Get("/api/projects", function(data) {
+		data.seeking = [];
+		data.has = [];
+		data.tags.forEach(function(tag) {
+			if (tag[0] == "L") data.seeking.push(tag.substr(1));
+			if (tag[0] == "H") data.has.push(tag.substr(1));
+		});
+		callback(data);
+	});
 }
 
 // Gets single project with given ID
 API.Projects.getById = function(id, callback) {
-	API.Request.Get("/api/projects/" + id, callback);
+	API.Request.Get("/api/projects/" + id, function(data) {
+		data.seeking = [];
+		data.has = [];
+		data.tags.forEach(function(tag) {
+			if (tag[0] == "L") data.seeking.push(tag.substr(1));
+			if (tag[0] == "H") data.has.push(tag.substr(1));
+		});
+		callback(data);
+	});
 }
