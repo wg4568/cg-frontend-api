@@ -13,8 +13,7 @@ API.Request.Get = function(url, callback) {
 	$.ajax({
 		type: "GET",
 		url: API.URL + url,
-		success: callback,
-		dataType: "json"
+		success: callback
 	});
 }
 
@@ -60,11 +59,13 @@ API.Projects = {};
 // Gets all projects in database as array
 API.Projects.getAll = function(callback) {
 	API.Request.Get("/api/projects", function(data) {
-		data.seeking = [];
-		data.has = [];
-		data.tags.forEach(function(tag) {
-			if (tag[0] == "L") data.seeking.push(tag.substr(1));
-			if (tag[0] == "H") data.has.push(tag.substr(1));
+		data.forEach(function(proj) {
+			proj.seeking = [];
+			proj.has = [];
+			proj.tags.forEach(function(tag) {
+				if (tag[0] == "L") proj.seeking.push(tag.substr(1));
+				if (tag[0] == "H") proj.has.push(tag.substr(1));
+			});
 		});
 		callback(data);
 	});
