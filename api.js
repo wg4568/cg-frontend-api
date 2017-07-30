@@ -28,6 +28,17 @@ API.Request.Post = function(url, data, callback) {
 	});
 }
 
+// Makes PATCH requests to API
+API.Request.Patch = function(url, data, callback) {
+	$.ajax({
+		type: "PATCH",
+		url: API.URL + url,
+		data: data,
+		success: callback,
+		dataType: "json"
+	});
+}
+
 // Container for methods relating to users
 API.Users = {};
 
@@ -88,6 +99,22 @@ API.Projects.getById = function(id, callback) {
 API.Projects.count = function(callback) {
 	API.Request.Get("/api/projects/count", function(data) {
 		callback(data.count);
+	});
+}
+
+// Changes project attribute
+API.Projects.update = function(id, name, value, callback) {
+	var dat = {};
+	dat[name] = value;
+	API.Request.Patch("/api/projects/" + id, dat, callback);
+}
+
+// Appends to project array
+API.Projects.append = function(id, aname, value, callback) {
+	API.Projects.getById(id, function(old_obj) {
+		var old_array = old_obj[aname];
+		old_array.push(value);
+		API.Projects.update(id, aname, old_array, callback);
 	});
 }
 
