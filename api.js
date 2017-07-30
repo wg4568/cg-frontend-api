@@ -93,7 +93,13 @@ API.Projects.count = function(callback) {
 
 // Creates project from 'info' object
 API.Projects.create = function(info, callback) {
-	info.
+	var tags = [];
+	info.seeking.forEach(function(tg) {
+		tags.push("L" + tg);
+	});
+	info.has.forEach(function(tg) {
+		tags.push("H" + tg);
+	})
 	API.Request.Post("/api/createProject", {
 		name: info.name,
 		description: info.description,
@@ -103,7 +109,6 @@ API.Projects.create = function(info, callback) {
 		thumbnail: info.thumbnail
 	}, callback);
 }
-
 
 // app.post('/api/createProject',function(req,res){
 //     var projectname = req.body.name;
