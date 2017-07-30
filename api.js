@@ -88,7 +88,7 @@ API.Projects.getById = function(id, callback) {
 API.Projects.count = function(callback) {
 	API.Request.Post("/api/projects/count", function(data) {
 		callback(data.count);
-	})
+	});
 }
 
 // Creates project from 'info' object
@@ -105,23 +105,23 @@ API.Projects.create = function(info, callback) {
 }
 
 
-app.post('/api/createProject',function(req,res){
-    var projectname = req.body.name;
-    var description = req.body.description;
-    var tags = req.body.tags;
-    var members = req.body.members;
-    var website = req.body.website;
-    var thumbnail = req.body.thumbnail;
-
-    var error = validate_project(projectname);
-
-    if(!error) request.post(SELF_URL+"/api/projects",{form:{
-        name: projectname,
-        description: description,
-        tags: tags,
-        members: members,
-        website: website,
-        thumbnail:thumbnail,
-    }});
-    res.send({error: error});
-});
+// app.post('/api/createProject',function(req,res){
+//     var projectname = req.body.name;
+//     var description = req.body.description;
+//     var tags = req.body.tags;
+//     var members = req.body.members;
+//     var website = req.body.website;
+//     var thumbnail = req.body.thumbnail;
+//
+//     var error = validate_project(projectname);
+//
+//     if(!error) request.post(SELF_URL+"/api/projects",{form:{
+//         name: projectname,
+//         description: description,
+//         tags: tags,
+//         members: members,
+//         website: website,
+//         thumbnail:thumbnail,
+//     }});
+//     res.send({error: error});
+// });
