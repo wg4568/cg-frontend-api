@@ -34,6 +34,17 @@ API.Users.getById = function(id, callback) {
 	API.Request.Get("/api/users/" + id, callback);
 }
 
+API.Users.create = function(info, callback) {
+	API.Request.Post("/api/createuser", {
+		username: info.username,
+		email: info.email,
+		fname: info.first_name,
+		lname: info.last_name,
+		location: info.location,
+		tags: info.tags
+	}, callback);
+}
+
 API.Projects = {};
 
 API.Projects.getAll = function(callback) {
