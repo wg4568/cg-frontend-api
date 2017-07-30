@@ -86,7 +86,7 @@ API.Projects.getById = function(id, callback) {
 
 // Gets number of projects
 API.Projects.count = function(callback) {
-	API.Request.Post("/api/projects/count", function(data) {
+	API.Request.Get("/api/projects/count", function(data) {
 		callback(data.count);
 	});
 }
