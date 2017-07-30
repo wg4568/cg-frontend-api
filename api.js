@@ -110,11 +110,19 @@ API.Projects.update = function(id, name, value, callback) {
 }
 
 // Appends to project array
-API.Projects.append = function(id, aname, value, callback) {
+API.Projects.append = function(id, name, value, callback) {
+	if (name == "seeking") {
+		name = "tags";
+		value = "L" + value;
+	}
+	if (name == "has") {
+		name = "tags";
+		value = "H" + value;
+	}
 	API.Projects.getById(id, function(old_obj) {
-		var old_array = old_obj[aname];
+		var old_array = old_obj[name];
 		old_array.push(value);
-		API.Projects.update(id, aname, old_array, callback);
+		API.Projects.update(id, name, old_array, callback);
 	});
 }
 
